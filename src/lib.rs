@@ -273,6 +273,39 @@ where
         self.find(element).is_ok()
     }
 
+    /// Returns a reference to the element in the set, if any, that is equal to the given value.
+    ///
+    /// The value may be any borrowed form of the set's element type,
+    /// but the ordering on the borrowed form *must* match the
+    /// ordering on the element type.
+    pub fn get<Q>(&self, element: &Q) -> Option<&A::Item>
+    where
+        A::Item: Borrow<Q>,
+        Q: Ord + ?Sized,
+    {
+        match self.find(element) {
+            Ok(idx) => Some(&self.vec[idx]),
+            Err(_) => None,
+        }
+    }
+
+    /// Returns a mutable reference to the element in the set, if any, that is equal to the given
+    /// value. It is an error to mutate the element such that its ordering changes.
+    ///
+    /// The value may be any borrowed form of the set's element type,
+    /// but the ordering on the borrowed form *must* match the
+    /// ordering on the element type.
+    pub fn get_mut<Q>(&mut self, element: &Q) -> Option<&mut A::Item>
+    where
+        A::Item: Borrow<Q>,
+        Q: Ord + ?Sized,
+    {
+        match self.find(element) {
+            Ok(idx) => Some(&mut self.vec[idx]),
+            Err(_) => None,
+        }
+    }
+
     fn find<Q>(&self, element: &Q) -> Result<usize, usize>
     where
         A::Item: Borrow<Q>,
