@@ -66,7 +66,7 @@ where
     }
 
     /// Get an iterator over all keys in the map.
-    pub fn keys<'a>(&'a self) -> impl Iterator<Item = &'a K>
+    pub fn keys<'a>(&'a self) -> impl Iterator<Item = &'a K> + Clone
     where
         KeyValuePair<K, V>: 'a,
     {
@@ -74,7 +74,7 @@ where
     }
 
     /// Get an iterator over all values in the map.
-    pub fn values<'a>(&'a self) -> impl Iterator<Item = &'a V>
+    pub fn values<'a>(&'a self) -> impl Iterator<Item = &'a V> + Clone
     where
         KeyValuePair<K, V>: 'a,
     {
