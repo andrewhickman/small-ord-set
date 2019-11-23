@@ -7,6 +7,10 @@
     missing_docs
 )]
 
+mod map;
+
+pub use self::map::*;
+
 use std::borrow::Borrow;
 use std::cmp::Ordering;
 use std::fmt::{self, Debug};
