@@ -64,6 +64,22 @@ where
     {
         self.get_mut(key).map(|kvp| &mut kvp.value)
     }
+
+    /// Get an iterator over all keys in the map.
+    pub fn keys<'a>(&'a self) -> impl Iterator<Item = &'a K>
+    where
+        KeyValuePair<K, V>: 'a,
+    {
+        self.iter().map(|kvp| &kvp.key)
+    }
+
+    /// Get an iterator over all values in the map.
+    pub fn values<'a>(&'a self) -> impl Iterator<Item = &'a V>
+    where
+        KeyValuePair<K, V>: 'a,
+    {
+        self.iter().map(|kvp| &kvp.value)
+    }
 }
 
 impl<K: PartialEq, V> PartialEq for KeyValuePair<K, V> {
