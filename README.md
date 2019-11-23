@@ -7,3 +7,5 @@
 [dl]: https://docs.rs/small-ord-set/
 
 # small-ord-set
+
+A set data-structure represented by a sorted `SmallVec`.
