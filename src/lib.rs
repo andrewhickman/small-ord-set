@@ -7,8 +7,10 @@
     missing_docs
 )]
 
+mod entry;
 mod map;
 
+pub use self::entry::*;
 pub use self::map::*;
 
 use std::borrow::Borrow;
@@ -307,6 +309,36 @@ where
         match self.find(element) {
             Ok(idx) => Some(&mut self.vec[idx]),
             Err(_) => None,
+        }
+    }
+
+    /// Gets the given key's corresponding entry in the map for in-place manipulation.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use small_ord_set::{SmallOrdSet, KeyValuePair};
+    ///
+    /// let mut letters = SmallOrdSet::<[KeyValuePair<char, u32>; 8]>::new();
+    ///
+    /// for ch in "a short treatise on fungi".chars() {
+    ///     let counter = letters.entry(ch).or_insert(0);
+    ///     *counter += 1;
+    /// }
+    ///
+    /// assert_eq!(letters.get_value(&'s'), Some(&2));
+    /// assert_eq!(letters.get_value(&'t'), Some(&3));
+    /// assert_eq!(letters.get_value(&'u'), Some(&1));
+    /// assert_eq!(letters.get_value(&'y'), None);
+    /// ```
+    pub fn entry<Q>(&mut self, key: Q) -> Entry<A, Q>
+    where
+        A::Item: Borrow<Q>,
+        Q: Ord,
+    {
+        match self.find(&key) {
+            Ok(idx) => Entry::occupied(self, idx),
+            Err(idx) => Entry::vacant(self, idx, key),
         }
     }
 
