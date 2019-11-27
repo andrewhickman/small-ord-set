@@ -1,7 +1,7 @@
 [package]
 name = "small-ord-set"
 description = "A set data-structure represented by a sorted `SmallVec`"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Andrew Hickman <andrew.hickman1@sky.com>"]
 repository = "https://github.com/andrewhickman/small-ord-set"
 documentation = "https://docs.rs/small-ord-set"
