@@ -1,6 +1,7 @@
 use std::borrow::Borrow;
 use std::cmp::Ordering;
 use std::fmt::{self, Debug};
+use std::hash::{Hash, Hasher};
 
 use smallvec::Array;
 
@@ -8,7 +9,7 @@ use crate::SmallOrdSet;
 
 /// A key-value pair. When used as the element type of a `SmallOrdSet`, it
 /// acts as a map.
-#[derive(Copy, Clone, Default, Hash)]
+#[derive(Copy, Clone, Default)]
 pub struct KeyValuePair<K, V> {
     /// The key, used for checking ordering and equality.
     pub key: K,
@@ -79,6 +80,12 @@ where
         KeyValuePair<K, V>: 'a,
     {
         self.iter().map(|kvp| &kvp.value)
+    }
+}
+
+impl<K: Hash, V> Hash for KeyValuePair<K, V> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.key.hash(state)
     }
 }
 
