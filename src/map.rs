@@ -9,6 +9,9 @@ use crate::SmallOrdSet;
 
 /// A key-value pair. When used as the element type of a `SmallOrdSet`, it
 /// acts as a map.
+///
+/// Comparisons of this type only look at the key. This property also applies
+/// to `SmallOrdSet<KeyValuePair>`.
 #[derive(Copy, Clone, Default)]
 pub struct KeyValuePair<K, V> {
     /// The key, used for checking ordering and equality.
