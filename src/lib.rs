@@ -353,7 +353,7 @@ where
     }
 
     fn sort_and_dedup(&mut self) {
-        self.vec.sort();
+        self.vec.sort_unstable();
         self.vec.dedup();
     }
 }
