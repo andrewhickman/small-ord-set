@@ -1,7 +1,7 @@
 //! This crate provides the [`SmallOrdSet`](struct.SmallOrdSet.html) type, a set data-structure
 //! represented by a sorted `SmallVec`.
 
-#![doc(html_root_url = "https://docs.rs/small-ord-set/0.1.1")]
+#![doc(html_root_url = "https://docs.rs/small-ord-set/0.1.2")]
 #![deny(
     missing_debug_implementations,
     missing_copy_implementations,
